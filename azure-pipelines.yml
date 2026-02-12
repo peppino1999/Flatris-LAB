@@ -21,7 +21,7 @@ variables:
   environmentName: 'flatris'
  
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'Default'
   
 stages:
 - stage: Archive
@@ -30,7 +30,7 @@ stages:
   - job: Archive
     displayName: Archive
     pool:
-      vmImage: $(vmImageName)
+      name: $(vmImageName)
     steps:   
     - task: AzureAppServiceSettings@1
       inputs:
@@ -65,7 +65,7 @@ stages:
     displayName: Deploy
     environment: $(environmentName)
     pool: 
-      vmImage: $(vmImageName)
+      name: $(vmImageName)
     strategy:
       runOnce:
         deploy:
