@@ -7,7 +7,7 @@ variables:
   resourceGroupName: 'VisualStudioOnline-2F36836A663241BB8262844FEB13929F'
   environmentName: 'flatris'
   vmImageName: Default
-  buildFolder: 'dist'             
+  buildFolder: 'web/.next'             
 
 stages:
 - stage: Build
