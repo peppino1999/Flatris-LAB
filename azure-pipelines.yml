@@ -79,3 +79,8 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+            
+          - script: |
+                  cd $(Build.SourcesDirectory)
+                  npx babel-node server/start-prod.js
+            displayName: 'Start server with npx'
