@@ -5,9 +5,9 @@ variables:
   azureSubscription: 'dfe5229f-1fa1-4e86-ace2-719be2561fc4'
   webAppName: 'flatris'
   resourceGroupName: 'VisualStudioOnline-2F36836A663241BB8262844FEB13929F'
-  environmentName: 'flatris'
+  environmentName: 'prod'
   vmImageName: Default
-  buildFolder: 'web/.next'             
+               
 
 stages:
 - stage: Build
@@ -31,7 +31,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive build output'
       inputs:
-        rootFolderOrFile: '$(buildFolder)'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
         includeRootFolder: false
         archiveType: zip
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
@@ -62,7 +62,14 @@ stages:
               resourceGroupName: $(resourceGroupName)
               appSettings: |
                 [
-                  { "name": "SCM_DO_BUILD_DURING_DEPLOYMENT", "value": "false" }
+                   {
+                    "name": "SCM_DO_BUILD_DURING_DEPLOYMENT",
+                    "value": "false"
+                  },
+                  {
+                    "name": "NODE_ENV",
+                    "value": "production"
+                  }
                 ]
 
           - task: AzureWebApp@1
